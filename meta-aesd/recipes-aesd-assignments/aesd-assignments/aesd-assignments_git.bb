@@ -16,6 +16,10 @@ SRCREV = "4d448fd2c1c87cfc3505e0a66a4808c0589f455d"
 FILES:${PN} += "${bindir}/aesdsocket"
 FILES:${PN} += "${sysconfdir}/init.d/S99aesdsocket"
 
+#Need for proper linking per Yocto documentation
+TARGET_CC_ARCH += "${LDFLAGS}"
+
+
 # TODO: customize these as necessary for any libraries you need for your application
 do_configure () {
 	:
