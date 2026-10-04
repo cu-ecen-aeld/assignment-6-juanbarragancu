@@ -16,9 +16,6 @@ SRCREV = "4d448fd2c1c87cfc3505e0a66a4808c0589f455d"
 FILES:${PN} += "${bindir}/aesdsocket"
 FILES:${PN} += "${sysconfdir}/init.d/S99aesdsocket"
 
-#Need for proper linking per Yocto documention
-TARGET_CC_ARCH += "${LDFLAGS}"
-
 # TODO: customize these as necessary for any libraries you need for your application
 do_configure () {
 	:
@@ -26,7 +23,7 @@ do_configure () {
 
 do_compile () {
     # TODO: switch to the server directory where your source code to be built is located
-    cd server
+        cd ${S}/server
 	oe_runmake
 }
 
@@ -47,6 +44,6 @@ do_install () {
 	install -d ${D}${bindir}
         install -d ${D}${sysconfdir}/init.d/
 
-        install -m 0755 server/aesdsocket ${D}${bindir}/
-        install -m 0755 server/aesdsocket-start-stop.sh ${D}${sysconfdir}/init.d/S99aesdsocket
+        install -m 0755 ${S}/server/aesdsocket ${D}${bindir}/
+        install -m 0755 ${S}/server/aesdsocket-start-stop.sh ${D}${sysconfdir}/init.d/S99aesdsocket
 }
